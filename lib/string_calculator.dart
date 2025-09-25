@@ -13,6 +13,7 @@ class StringCalculator {
     if (numbers.isEmpty) {
       return 0;
     }
-    throw UnimplementedError('Not implemented yet');
+    
+    return int.parse(numbers);
   }
 }
