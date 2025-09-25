@@ -10,7 +10,9 @@
 class StringCalculator {
   /// Calculate sum of numbers in a string
   int add(String numbers) {
-    // TODO: Implementation will be added following TDD
+    if (numbers.isEmpty) {
+      return 0;
+    }
     throw UnimplementedError('Not implemented yet');
   }
 }
