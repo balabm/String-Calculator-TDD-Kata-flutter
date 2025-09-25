@@ -14,9 +14,19 @@ class StringCalculator {
       return 0;
     }
     
-    // Replace newlines with commas to normalize delimiters
-    final normalized = numbers.replaceAll('\n', ',');
-    final parts = normalized.split(',');
+    String delimiter = ',';
+    String numbersToProcess = numbers;
+    
+    // Check for custom delimiter
+    if (numbers.startsWith('//')) {
+      final parts = numbers.split('\n');
+      delimiter = parts[0].substring(2); // Extract delimiter after '//'
+      numbersToProcess = parts.sublist(1).join('\n'); // Get the numbers part
+    }
+    
+    // Replace newlines with the current delimiter to normalize
+    final normalized = numbersToProcess.replaceAll('\n', delimiter);
+    final parts = normalized.split(delimiter);
     return parts.map(int.parse).reduce((a, b) => a + b);
   }
 }
