@@ -38,6 +38,15 @@ class StringCalculator {
     // Replace newlines with the current delimiter to normalize
     final normalized = numbersToProcess.replaceAll('\n', delimiter);
     final parts = normalized.split(delimiter);
-    return parts.map(int.parse).reduce((a, b) => a + b);
+    final parsedNumbers = parts.map(int.parse).toList();
+    
+    // Check for negative numbers
+    final negativeNumbers = parsedNumbers.where((num) => num < 0).toList();
+    if (negativeNumbers.isNotEmpty) {
+      final negativeList = negativeNumbers.join(', ');
+      throw NegativeNumberException('negative numbers not allowed: $negativeList');
+    }
+    
+    return parsedNumbers.reduce((a, b) => a + b);
   }
 }
