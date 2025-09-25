@@ -56,5 +56,25 @@ void main() {
       // Assert
       expect(result, equals(3));
     });
+
+    test('should throw exception for negative numbers', () {
+      // Act & Assert
+      expect(
+        () => calculator.add('1,-2,3'),
+        throwsA(isA<NegativeNumberException>()
+            .having((e) => e.toString(), 'message', 
+                    contains('negative numbers not allowed: -2'))),
+      );
+    });
+
+    test('should throw exception with all negative numbers listed', () {
+      // Act & Assert
+      expect(
+        () => calculator.add('1,-2,-3,4'),
+        throwsA(isA<NegativeNumberException>()
+            .having((e) => e.toString(), 'message', 
+                    contains('negative numbers not allowed: -2, -3'))),
+      );
+    });
   });
 }

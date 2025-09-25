@@ -7,6 +7,17 @@
 /// 5. Newline delimiters supported
 /// 6. Custom delimiters supported
 /// 7. Negative number validation
+
+/// Exception thrown when negative numbers are used in calculation
+class NegativeNumberException implements Exception {
+  final String message;
+  
+  NegativeNumberException(this.message);
+  
+  @override
+  String toString() => message;
+}
+
 class StringCalculator {
   /// Calculate sum of numbers in a string
   int add(String numbers) {
