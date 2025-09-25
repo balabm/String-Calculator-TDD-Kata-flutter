@@ -48,5 +48,13 @@ void main() {
       // Assert
       expect(result, equals(6));
     });
+
+    test('should handle custom delimiters', () {
+      // Act
+      final result = calculator.add('//;\n1;2');
+      
+      // Assert
+      expect(result, equals(3));
+    });
   });
 }
