@@ -32,5 +32,13 @@ void main() {
       // Assert
       expect(result, equals(3));
     });
+
+    test('should handle any amount of numbers', () {
+      // Act
+      final result = calculator.add('1,2,3,4,5');
+      
+      // Assert
+      expect(result, equals(15));
+    });
   });
 }
