@@ -1,8 +1,3 @@
-# string_calculator_tdd
-
-A new Flutter project.
-
-## Getting Started
 
 # String Calculator TDD Kata - Flutter Assessment
 
