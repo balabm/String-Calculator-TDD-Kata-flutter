@@ -16,5 +16,13 @@ void main() {
       // Assert
       expect(result, equals(0));
     });
+
+    test('should return the number itself for single number', () {
+      // Act
+      final result = calculator.add('5');
+      
+      // Assert
+      expect(result, equals(5));
+    });
   });
 }
