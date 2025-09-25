@@ -24,5 +24,13 @@ void main() {
       // Assert
       expect(result, equals(5));
     });
+
+    test('should return sum of two comma-separated numbers', () {
+      // Act
+      final result = calculator.add('1,2');
+      
+      // Assert
+      expect(result, equals(3));
+    });
   });
 }
