@@ -25,28 +25,38 @@ class StringCalculator {
       return 0;
     }
     
-    String delimiter = ',';
-    String numbersToProcess = numbers;
+    final (delimiter, numbersToProcess) = _parseDelimiterAndNumbers(numbers);
+    final parsedNumbers = _parseNumbers(numbersToProcess, delimiter);
     
-    // Check for custom delimiter
-    if (numbers.startsWith('//')) {
-      final parts = numbers.split('\n');
-      delimiter = parts[0].substring(2); // Extract delimiter after '//'
-      numbersToProcess = parts.sublist(1).join('\n'); // Get the numbers part
+    _validateNoNegativeNumbers(parsedNumbers);
+    
+    return parsedNumbers.reduce((a, b) => a + b);
+  }
+  
+  /// Parse delimiter and numbers from input string
+  (String, String) _parseDelimiterAndNumbers(String input) {
+    if (input.startsWith('//')) {
+      final parts = input.split('\n');
+      final delimiter = parts[0].substring(2);
+      final numbersToProcess = parts.sublist(1).join('\n');
+      return (delimiter, numbersToProcess);
     }
-    
-    // Replace newlines with the current delimiter to normalize
-    final normalized = numbersToProcess.replaceAll('\n', delimiter);
+    return (',', input);
+  }
+  
+  /// Parse numbers from string using the given delimiter
+  List<int> _parseNumbers(String numbersText, String delimiter) {
+    final normalized = numbersText.replaceAll('\n', delimiter);
     final parts = normalized.split(delimiter);
-    final parsedNumbers = parts.map(int.parse).toList();
-    
-    // Check for negative numbers
-    final negativeNumbers = parsedNumbers.where((num) => num < 0).toList();
+    return parts.map(int.parse).toList();
+  }
+  
+  /// Validate that no negative numbers are present
+  void _validateNoNegativeNumbers(List<int> numbers) {
+    final negativeNumbers = numbers.where((num) => num < 0).toList();
     if (negativeNumbers.isNotEmpty) {
       final negativeList = negativeNumbers.join(', ');
       throw NegativeNumberException('negative numbers not allowed: $negativeList');
     }
-    
-    return parsedNumbers.reduce((a, b) => a + b);
   }
 }
