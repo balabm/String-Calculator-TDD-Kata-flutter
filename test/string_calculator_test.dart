@@ -40,5 +40,13 @@ void main() {
       // Assert
       expect(result, equals(15));
     });
+
+    test('should handle newline delimiters', () {
+      // Act
+      final result = calculator.add('1\n2,3');
+      
+      // Assert
+      expect(result, equals(6));
+    });
   });
 }
