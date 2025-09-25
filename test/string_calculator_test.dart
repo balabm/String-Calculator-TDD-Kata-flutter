@@ -12,7 +12,7 @@ void main() {
     test('should return 0 for empty string', () {
       // Act
       final result = calculator.add('');
-      
+
       // Assert
       expect(result, equals(0));
     });
@@ -20,7 +20,7 @@ void main() {
     test('should return the number itself for single number', () {
       // Act
       final result = calculator.add('5');
-      
+
       // Assert
       expect(result, equals(5));
     });
@@ -28,7 +28,7 @@ void main() {
     test('should return sum of two comma-separated numbers', () {
       // Act
       final result = calculator.add('1,2');
-      
+
       // Assert
       expect(result, equals(3));
     });
@@ -36,7 +36,7 @@ void main() {
     test('should handle any amount of numbers', () {
       // Act
       final result = calculator.add('1,2,3,4,5');
-      
+
       // Assert
       expect(result, equals(15));
     });
@@ -44,7 +44,7 @@ void main() {
     test('should handle newline delimiters', () {
       // Act
       final result = calculator.add('1\n2,3');
-      
+
       // Assert
       expect(result, equals(6));
     });
@@ -52,7 +52,7 @@ void main() {
     test('should handle custom delimiters', () {
       // Act
       final result = calculator.add('//;\n1;2');
-      
+
       // Assert
       expect(result, equals(3));
     });
@@ -61,9 +61,13 @@ void main() {
       // Act & Assert
       expect(
         () => calculator.add('1,-2,3'),
-        throwsA(isA<NegativeNumberException>()
-            .having((e) => e.toString(), 'message', 
-                    contains('negative numbers not allowed: -2'))),
+        throwsA(
+          isA<NegativeNumberException>().having(
+            (e) => e.toString(),
+            'message',
+            contains('negative numbers not allowed: -2'),
+          ),
+        ),
       );
     });
 
@@ -71,9 +75,13 @@ void main() {
       // Act & Assert
       expect(
         () => calculator.add('1,-2,-3,4'),
-        throwsA(isA<NegativeNumberException>()
-            .having((e) => e.toString(), 'message', 
-                    contains('negative numbers not allowed: -2, -3'))),
+        throwsA(
+          isA<NegativeNumberException>().having(
+            (e) => e.toString(),
+            'message',
+            contains('negative numbers not allowed: -2, -3'),
+          ),
+        ),
       );
     });
   });
